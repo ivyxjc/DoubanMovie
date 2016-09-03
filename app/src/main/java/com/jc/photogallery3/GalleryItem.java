@@ -85,6 +85,6 @@ public class GalleryItem {
 
     @Override
     public String toString() {
-        return mTitle+"\n"+mYear+"\n"+mAverageRating;
+        return mTitle+"\n"+mYear+"\n"+mAverageRating+"\n"+mCollectNum ;
     }
 }
