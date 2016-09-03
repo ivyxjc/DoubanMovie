@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jc on 8/28/2016.
  */
@@ -28,7 +31,20 @@ public class DataParser {
 
 
 
-    public static GalleryItem getMovieName(JSONObject dataJson, int num){
+    
+    private static final String CAST_ID="id";
+    private static final String CAST_NAME="name";
+
+    private static final String DIRECTOR_ID="id";
+    private static final String DIRECTOR_NAME="name";
+
+    private static final String MOVIE_IMAGE="images";
+
+
+
+
+
+    public static GalleryItem getMovieInfo(JSONObject dataJson, int num){
 //        Map<String,String> res=new HashMap<>();
         GalleryItem res=new GalleryItem();
         try {
@@ -66,7 +82,25 @@ public class DataParser {
              */
 
 
+            /**
+             * 获取电影照片
+             *  "images": {
+             "small": "https://img3.doubanio.com/view/movie_poster_cover/ipst/public/p2377455123.jpg",
+             "large": "https://img3.doubanio.com/view/movie_poster_cover/lpst/public/p2377455123.jpg",
+             "medium": "https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2377455123.jpg"
+             },
+             */
 
+            JSONObject movieImage=movieJSONObject.getJSONObject(MOVIE_IMAGE);
+            String movieImageUrl=movieImage.getString("large");
+            res.setImageUrl(movieImageUrl);
+
+            /**
+             *获取电影Id
+             *
+             */
+            String movieId=movieJSONObject.getString(MOVIE_ID);
+            res.setMovieId(movieId);
 
             /**
              * 获取主演名单
@@ -92,15 +126,11 @@ public class DataParser {
                      "id": "1047994"
                  },
              */
-//            JSONArray casts=movieJSONObject.getJSONArray(CASTS);
-//            StringBuilder castsStringBuilder=new StringBuilder();
-//
-//            for(int i=0;i<casts.length();i++){
-//                JSONObject castJSON=casts.getJSONObject(i);
-//                castsStringBuilder.append(castJSON.get("name")+"AAAA");
-//            }
-//            res.put(MapKeys.CASTS,castsStringBuilder.toString());
-
+            JSONArray casts=movieJSONObject.getJSONArray(CASTS);
+            for (int i=0;i<casts.length();i++){
+                JSONObject castJSON=casts.getJSONObject(i);
+                res.addCast(Integer.parseInt(castJSON.get(CAST_ID).toString()),castJSON.get(CAST_NAME).toString());
+            }
 
             /**
              * 获取导演信息
@@ -119,8 +149,11 @@ public class DataParser {
                  ],
              */
 
-//            JSONArray directors=movieJSONObject.getJSONArray(DIRECTORS);
-//            StringBuilder directorsStringBuilder=new StringBuilder();
+            JSONArray directors=movieJSONObject.getJSONArray(DIRECTORS);
+            for (int i=0;i<casts.length();i++){
+                JSONObject directorJSON=casts.getJSONObject(i);
+                res.addCast(Integer.parseInt(directorJSON.get(DIRECTOR_ID).toString()),directorJSON.get(DIRECTOR_NAME).toString());
+            }
 //            for(int i=0;i<directors.length();i++){
 //                JSONObject directorJSON=directors.getJSONObject(i);
 //                directorsStringBuilder.append(directorJSON.get("name")+"AAAA");
@@ -145,8 +178,7 @@ public class DataParser {
              * id
              */
 
-            String movieId=movieJSONObject.getString(MOVIE_ID);
-            res.setMovieId(movieId);
+
 ;
             return res;
         }catch (JSONException e){

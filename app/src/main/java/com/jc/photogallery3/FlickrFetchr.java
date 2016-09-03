@@ -75,7 +75,7 @@ public class FlickrFetchr {
             JSONObject jsonObject=new JSONObject(xmlString);
 
             for(int i=0;i<20;i++){
-                GalleryItem galleryItem =DataParser.getMovieName(jsonObject,i);
+                GalleryItem galleryItem =DataParser.getMovieInfo(jsonObject,i);
                 items.add(galleryItem);
                 Log.i(TAG,"Received data: "+ galleryItem);
             }

@@ -1,5 +1,9 @@
 package com.jc.photogallery3;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jc on 8/28/2016.
  */
@@ -9,13 +13,19 @@ public class GalleryItem {
     private String mTitle;
     private String mOriginalTitle;
     private String mAverageRating;
-//    private ArrayList<Map<String,String>> mCasts;
+    private Map<Integer,String> mCasts;
+    private Map<Integer,String> mDirectors;
 
-
-
-//    private String[] mDirectors;
     private String mCollectNum;
     private String mYear;
+
+    private String mImageUrl;// 图片url
+
+
+    public GalleryItem(){
+        mCasts=new HashMap<>();
+        mDirectors=new HashMap<>();
+    }
 
 
     public String getOriginalTitle() {
@@ -50,22 +60,6 @@ public class GalleryItem {
         mAverageRating = averageRating;
     }
 
-//    public String[] getCasts() {
-//        return mCasts;
-//    }
-//
-//    public void setCasts(String[] casts) {
-//        mCasts = casts;
-//    }
-//
-//    public String[] getDirectors() {
-//        return mDirectors;
-//    }
-//
-//    public void setDirectors(String[] directors) {
-//        mDirectors = directors;
-//    }
-
     public String getCollectNum() {
         return mCollectNum;
     }
@@ -80,6 +74,23 @@ public class GalleryItem {
 
     public void setYear(String year) {
         mYear = year;
+    }
+
+
+    public void addCast(Integer i,String s){
+        mCasts.put(i,s);
+    }
+
+    public void addDirector(Integer i,String s){
+        mDirectors.put(i,s);
+    }
+
+    public void setImageUrl(String url){
+        mImageUrl=url;
+    }
+
+    public String getImageUrl(){
+        return mImageUrl;
     }
 
 
