@@ -1,9 +1,9 @@
-package com.jc.photogallery3.douban;
+package com.jc.douban.douban;
 
 import android.net.Uri;
 import android.util.Log;
 
-import com.jc.photogallery3.model.GalleryItem;
+import com.jc.douban.model.GalleryItem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +26,8 @@ public class FlickrFetchr {
     private static final String TOPIC_MOVIE="movie";
     //正在上映 /v2/movie/in_theaters
     private static final String SUBJECT_IN_THEATERS="in_theaters";
+    //电影信息 /v2/movie/subject/:id
+    private static final String MOVIE_DETAIL="subject/";
 
     public byte[] getUrlBytes(String urlSpec) throws IOException{
 
@@ -62,7 +64,7 @@ public class FlickrFetchr {
     }
 
 
-    public ArrayList<GalleryItem> fetchItems(){
+    public ArrayList<GalleryItem> fetchItems_SubjectInTheaters(){
         ArrayList<GalleryItem> items=new ArrayList<>();
         try{
             String url= Uri.parse(ENDPOINT).buildUpon()
@@ -76,9 +78,9 @@ public class FlickrFetchr {
             JSONObject jsonObject=new JSONObject(xmlString);
 
             for(int i=0;i<20;i++){
-                GalleryItem galleryItem = DataParser.getMovieInfo(jsonObject,i);
+                GalleryItem galleryItem = DataParser_SubjectInTheaters.getMovieInfo(jsonObject,i);
                 items.add(galleryItem);
-                Log.i(TAG,"Received data: "+ galleryItem);
+                Log.i(TAG,"Received data : "+ galleryItem);
             }
 
 
@@ -87,7 +89,34 @@ public class FlickrFetchr {
         }catch (JSONException jsonE){
             Log.e(TAG,"Failed to build jsonObject"+jsonE);
         }
-
         return items;
+    }
+
+    public GalleryItem fetchItems_MovieDetailInfo(String id){
+        GalleryItem item=new GalleryItem();
+        try{
+            String url= Uri.parse(ENDPOINT).buildUpon()
+                    .appendPath(VERSION)
+                    .appendPath(TOPIC_MOVIE)
+                    .appendPath(MOVIE_DETAIL)
+                    .appendPath(id)
+                    .build().toString();
+            Log.i(TAG,"url "+url);
+
+            String xmlString =getUrl(url);
+            JSONObject jsonObject=new JSONObject(xmlString);
+
+            GalleryItem galleryItem = DataParser_MovieDetailInfo.getMovieInfo(jsonObject);
+            item=galleryItem;
+            Log.i(TAG,"Received data (movie details): "+ galleryItem);
+
+
+        }catch (IOException ioe){
+            Log.e(TAG,"Failed to fetch items"+ioe);
+        }catch (JSONException jsonE){
+            Log.e(TAG,"Failed to build jsonObject"+jsonE);
+        }
+
+        return item;
     }
 }

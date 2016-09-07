@@ -1,16 +1,19 @@
-package com.jc.photogallery3.activity;
+package com.jc.douban.activity;
 
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.jc.photogallery3.activity.base.SingleFragmentActivity;
-import com.jc.photogallery3.fragment.MovieDetailFragment;
+import com.jc.douban.R;
+import com.jc.douban.activity.base.SingleFragmentActivity;
+import com.jc.douban.fragment.MovieDetailFragment;
 
 /**
  * Created by jc on 9/5/2016.
  */
 public class MovieDetailActivity extends SingleFragmentActivity {
+
 
     @Override
     protected Fragment createFragment() {

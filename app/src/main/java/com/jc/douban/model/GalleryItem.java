@@ -1,4 +1,4 @@
-package com.jc.photogallery3.model;
+package com.jc.douban.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,22 +9,24 @@ import java.util.Map;
  */
 public class GalleryItem {
 
-    private String mMovieId;
-    private String mTitle;
-    private String mOriginalTitle;
-    private String mAverageRating;
-    private Map<Integer,String> mCasts;
-    private Map<Integer,String> mDirectors;
+    private String mMovieId;//电影id
+    private String mTitle;//电影名
+    private String mOriginalTitle;//电影原名
+    private String mAverageRating;//电影平均分数
+    private Map<Integer,String> mCasts;//演员
+    private Map<Integer,String> mDirectors;//导演
 
-    private String mCollectNum;
-    private String mYear;
+    private String mCollectNum;//看过的人数
+    private String mYear;//电影年份
 
     private String mImageUrl;// 图片url
 
+    private ArrayList<String> mCountries;//出品国家
 
     public GalleryItem(){
         mCasts=new HashMap<>();
         mDirectors=new HashMap<>();
+        mCountries=new ArrayList<>();
     }
 
 
@@ -93,9 +95,23 @@ public class GalleryItem {
         return mImageUrl;
     }
 
+    public void addCountry(String s){
+        mCountries.add(s);
+    }
+
+    public ArrayList<String> getCountries(){
+        return mCountries;
+    }
+
 
     @Override
     public String toString() {
-        return mTitle+"\n"+mYear+"\n"+mAverageRating+"\n"+mCollectNum ;
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append("Title: "+mTitle+'\n')
+                .append("Year: "+mYear+'\n')
+                .append("imageUrl: "+mImageUrl+'\n')
+                .append("countries: "+mCountries+'\n');
+
+        return stringBuilder.toString();
     }
 }

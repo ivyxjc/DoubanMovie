@@ -1,4 +1,4 @@
-package com.jc.photogallery3;
+package com.jc.douban;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,8 +9,7 @@ import android.support.v4.util.LruCache;
 import android.util.Log;
 
 
-import com.jc.photogallery3.douban.FlickrFetchr;
-import com.jc.photogallery3.model.GalleryItem;
+import com.jc.douban.douban.FlickrFetchr;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -34,9 +33,29 @@ public class ThumbnailDownloader<Token> extends HandlerThread {
     Listener<Token> mListener;
 
 
+    /**
+     * 构造函数
+     * @param responseHandler
+     * @param bitmapLruCache
+     */
+    public ThumbnailDownloader(Handler responseHandler,LruCache<String,Bitmap> bitmapLruCache){
+        super(TAG);
+        mResponseHandler=responseHandler;
+
+        mMemoryCache=bitmapLruCache;
+
+    }
+
+
     //预加载
     private LruCache<String, Bitmap> mMemoryCache;
 
+
+    /**
+     * 将url 插入requestmap中,
+     * @param token
+     * @param url
+     */
     public void queueThumbnail(Token token,String url){
         requestMap.put(token,url);
 
@@ -61,13 +80,6 @@ public class ThumbnailDownloader<Token> extends HandlerThread {
         mListener = listener;
     }
 
-    public ThumbnailDownloader(Handler responseHandler,LruCache<String,Bitmap> bitmapLruCache){
-        super(TAG);
-        mResponseHandler=responseHandler;
-
-        mMemoryCache=bitmapLruCache;
-
-    }
 
 
     @Override

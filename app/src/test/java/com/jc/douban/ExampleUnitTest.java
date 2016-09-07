@@ -1,4 +1,4 @@
-package com.jc.photogallery3;
+package com.jc.douban;
 
 import org.junit.Test;
 

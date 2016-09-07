@@ -1,4 +1,4 @@
-package com.jc.photogallery3;
+package com.jc.douban;
 
 /**
  * Created by jc on 8/28/2016.

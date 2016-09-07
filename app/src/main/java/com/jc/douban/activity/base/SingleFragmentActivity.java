@@ -1,4 +1,4 @@
-package com.jc.photogallery3.activity.base;
+package com.jc.douban.activity.base;
 
 /**
  * Created by jc on 8/27/2016.
@@ -6,7 +6,6 @@ package com.jc.photogallery3.activity.base;
 import android.os.Bundle;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.jc.photogallery3.R;
+import com.jc.douban.R;
 
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {

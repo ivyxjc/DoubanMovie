@@ -1,8 +1,8 @@
-package com.jc.photogallery3.douban;
+package com.jc.douban.douban;
 
 import android.util.Log;
 
-import com.jc.photogallery3.model.GalleryItem;
+import com.jc.douban.model.GalleryItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,8 +11,8 @@ import org.json.JSONObject;
 /**
  * Created by jc on 8/28/2016.
  */
-public class DataParser {
-    private static final String TAG="dataParser";
+public class DataParser_SubjectInTheaters {
+    private static final String TAG="dataParser_MovieInTheat";
 
     private static final String SUBJECTS="subjects";
 

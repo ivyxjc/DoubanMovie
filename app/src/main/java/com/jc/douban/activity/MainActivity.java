@@ -1,13 +1,14 @@
-package com.jc.photogallery3.activity;
+package com.jc.douban.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.jc.photogallery3.activity.base.SingleFragmentActivity;
-import com.jc.photogallery3.fragment.MainFragment;
+import com.jc.douban.TransferKeys;
+import com.jc.douban.activity.base.SingleFragmentActivity;
+import com.jc.douban.fragment.MainFragment;
+import com.jc.douban.model.GalleryItem;
 
 public class MainActivity extends SingleFragmentActivity {
     private Context mContext=this;
