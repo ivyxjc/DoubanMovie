@@ -1,3 +1,100 @@
 <resources>
-    <string name="app_name">PhotoGallery3</string>
+    <string name="app_name">豆瓣电影</string>
+    <string name="movie">电影海报</string>
+    <string name="action_settings">设置</string>
+    <string name="more_info">更多</string>
+
+
+
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+
+    <string name="search_failed">search failed!</string>
+    <string name="searching_for">searching &#8230;</string>
+
+    <!--menu-->
+    <string name="ic_search">搜索</string>
+    <string name="ic_setting">设置</string>
+    <string name="ic_sub_favorite">收藏</string>
+    <!--MainActivity_NavigationView-->
+    <string name="nav_home">首页</string>
+    <string name="nav_favorite">收藏</string>
+    <string name="nav_top250">豆瓣top250</string>
+    <!--MainActivity_NavigationView_header-->
+    <string name="user_name">用户昵称</string>
+    <string name="user_introduction">用户介绍</string>
+    <string name="user_edit">用户设置…</string>
+    <string name="ok">确定</string>
+    <string name="select_header">请选择获得头像方式</string>
+    <!--MainActivity-->
+    <string name="favorite_completed">收藏成功!</string>
+    <string name="favorite_cancel">取消收藏!</string>
+    <string name="exit">再按一次退出程序</string>
+    <!--SubjectItem-->
+    <string name="genres">类型: </string>
+    <string name="directors">导演</string>
+    <string name="director">(导演)</string>
+    <string name="actors">主演: </string>
+    <string name="dir_and_actor">(导演兼主演)</string>
+    <string name="actor">(主演)</string>
+    <string name="left_brackets">(</string>
+    <string name="count">人评价)</string>
+    <string name="box">票房: </string>
+    <string name="ake">又名: </string>
+    <string name="countries">制片国家或地区: </string>
+    <string name="summary">简介</string>
+    <string name="no_rating">暂无评分</string>
+    <string name="overflow">取消收藏</string>
+    <string name="douban_rating">豆瓣评分：</string>
+    <!--SubjectActivity-->
+    <string name="actor_list">影人</string>
+    <string name="recommend_list">相关推荐</string>
+    <string name="recommend_load_fail">获取失败请重试…</string>
+    <string name="recommend_loading">正在加载推荐…</string>
+    <!--CelebrityActivity-->
+    <string name="gender">性别：</string>
+    <string name="bron_place">出生地：</string>
+    <string name="cel_ake">中文名：</string>
+    <string name="cel_ake_en">英文名：</string>
+    <string name="video_works">的影视作品</string>
+    <!--adapter-->
+    <string name="load_completed">加载完毕！</string>
+    <string name="loading">正在加载更多…</string>
+    <!--SearchActivity-->
+    <string name="searching">正在搜索…</string>
+    <string name="query_hint">请输入要查询的电影…</string>
+    <string name="search_message">正在搜索…</string>
+    <string name="search_no_result">搜索无结果…</string>
+    <string name="search_error">刷新失败，请检查网络…</string>
+    <!--CollectAdapter-->
+    <string name="delete">移除</string>
+    <string name="enter">详细</string>
+    <string name="refresh">刷新</string>
+    <!--WebActivity-->
+    <string name="open">在浏览器中打开</string>
+    <string name="web_no_tips">打开失败，没有找到可以打开该链接的其它应用 :(</string>
+    <string name="skip">去豆瓣查看</string>
+    <string name="cancel">是否要取消收藏…</string>
+    <!--SimpleSubjectAdapter_FootView_tips-->
+    <string name="foot_loading">正在加载更多…</string>
+    <string name="foot_fail">加载失败，请点击重试。</string>
+    <string name="put_away">收起</string>
+
+    <string name="no_detail_info">暂无资料</string>
+    <string name="personal">个性化</string>
+    <string name="image_size">图片大小</string>
+    <string name="switch_language">切换语言</string>
+    <string name="switch_day_night">切换夜间模式</string>
+    <string name="profile">基本资料</string>
+    <string name="about">关于</string>
+    <string name="code_repo">源代码仓库地址</string>
+    <string name="source_code">源代码</string>
+    <string name="licence">开源许可</string>
+    <string name="nickname">呢称</string>
+    <string name="signature">个性签名</string>
+
 </resources>

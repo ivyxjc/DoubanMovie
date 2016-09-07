@@ -1,13 +1,12 @@
-package com.jc.photogallery3;
+package com.jc.photogallery3.douban;
 
 import android.util.Log;
+
+import com.jc.photogallery3.model.GalleryItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by jc on 8/28/2016.
@@ -31,7 +30,7 @@ public class DataParser {
 
 
 
-    
+
     private static final String CAST_ID="id";
     private static final String CAST_NAME="name";
 

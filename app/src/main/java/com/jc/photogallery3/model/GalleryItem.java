@@ -1,4 +1,4 @@
-package com.jc.photogallery3;
+package com.jc.photogallery3.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

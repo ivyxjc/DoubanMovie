@@ -1,7 +1,9 @@
-package com.jc.photogallery3;
+package com.jc.photogallery3.douban;
 
 import android.net.Uri;
 import android.util.Log;
+
+import com.jc.photogallery3.model.GalleryItem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +11,6 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class FlickrFetchr {
     //正在上映 /v2/movie/in_theaters
     private static final String SUBJECT_IN_THEATERS="in_theaters";
 
-    byte[] getUrlBytes(String urlSpec) throws IOException{
+    public byte[] getUrlBytes(String urlSpec) throws IOException{
 
         URL url=new URL(urlSpec);
 
@@ -75,7 +76,7 @@ public class FlickrFetchr {
             JSONObject jsonObject=new JSONObject(xmlString);
 
             for(int i=0;i<20;i++){
-                GalleryItem galleryItem =DataParser.getMovieInfo(jsonObject,i);
+                GalleryItem galleryItem = DataParser.getMovieInfo(jsonObject,i);
                 items.add(galleryItem);
                 Log.i(TAG,"Received data: "+ galleryItem);
             }
