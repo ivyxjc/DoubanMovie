@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jc.photogallery3.R;
+
 /**
  * Created by jc on 9/5/2016.
  */
@@ -20,6 +22,8 @@ public class MovieDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view=inflater.inflate(R.layout.fragment_movie_detail,container,false);
+
+        return view;
     }
 }
