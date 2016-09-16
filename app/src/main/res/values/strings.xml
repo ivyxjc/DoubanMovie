@@ -3,7 +3,8 @@
     <string name="movie">电影海报</string>
     <string name="action_settings">设置</string>
     <string name="more_info">更多</string>
-
+    <string name="in_theatre">正在热映</string>
+    <string name="coming_soon">即将上映</string>
 
 
 
@@ -36,9 +37,9 @@
     <string name="exit">再按一次退出程序</string>
     <!--SubjectItem-->
     <string name="genres">类型: </string>
-    <string name="directors">导演</string>
+    <string name="directors">导演:  </string>
     <string name="director">(导演)</string>
-    <string name="actors">主演: </string>
+    <string name="casts">主演:  </string>
     <string name="dir_and_actor">(导演兼主演)</string>
     <string name="actor">(主演)</string>
     <string name="left_brackets">(</string>
