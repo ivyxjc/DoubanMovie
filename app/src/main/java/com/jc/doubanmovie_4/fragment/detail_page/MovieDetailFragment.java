@@ -1,10 +1,10 @@
-package com.jc.doubanmovie_4.fragment;
+package com.jc.doubanmovie_4.fragment.detail_page;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.LruCache;
@@ -15,12 +15,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jc.doubanmovie_4.LogKeys;
 import com.jc.doubanmovie_4.R;
 import com.jc.doubanmovie_4.TransferKeys;
-import com.jc.doubanmovie_4.douban.FlickrFetchr;
+import com.jc.doubanmovie_4.douban.DoubanFetchrMain;
+import com.jc.doubanmovie_4.douban.DoubanFetchrMovieDetail;
 import com.jc.doubanmovie_4.model.MainItem;
 import com.jc.doubanmovie_4.utils.ToString;
 
@@ -47,17 +50,19 @@ public class MovieDetailFragment extends Fragment {
 
     private MainItem mItem;
 
+    private RequestManager mRequestManager;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        mRequestManager=Glide.with(getActivity());
 
         Intent intent = getActivity().getIntent();
         mMovieTitle = (String) intent.getSerializableExtra(TransferKeys.MAIN_MOVIE_DETAIL_MOVIE_NAME);
         mMovieId = (String) intent.getSerializableExtra(TransferKeys.MAIN_MOVIE_DETAIL_ID);
-
-
         new FetchItemTask().execute();
+
 
     }
 
@@ -97,13 +102,13 @@ public class MovieDetailFragment extends Fragment {
     private class FetchItemTask extends AsyncTask<Void,Void,MainItem> {
         @Override
         protected MainItem doInBackground(Void... params) {
-            return new FlickrFetchr().fetchItems_MovieDetailInfo(mMovieId);
+            DoubanFetchrMovieDetail df=new DoubanFetchrMovieDetail();
+            return df.fetchItems_MovieDetailInfo(mMovieId);
         }
 
         @Override
         protected void onPostExecute(MainItem galleryItems) {
             mItem=galleryItems;
-
 
             mMovieCountry_tv.setText(ToString.arrayToString(mItem.getCountries()));
             mMovieGenres_tv.setText(ToString.arrayToString(mItem.getGenres()));
@@ -111,16 +116,26 @@ public class MovieDetailFragment extends Fragment {
             mCasts_tv.setText(ToString.mapToString(mItem.getCasts()));
             mDirectors_tv.setText(ToString.mapToString(mItem.getDirectors()));
             mMovieSummary_tv.setText(mItem.getSummary());
-            Glide.with(getActivity())
+
+
+            mRequestManager
                     .load(mItem.getImageUrl())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .into(mMovieImageview);
+
+
+
+
+
         }
-
-
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+//        mRequestManager.onDestroy();
+    }
 }
 

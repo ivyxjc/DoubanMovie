@@ -8,65 +8,65 @@
                                     android:padding="@dimen/size_4dp"
                                     app:cardElevation="@dimen/size_1dp">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:colorBackground"
+    android:orientation="vertical"
+    android:padding="@dimen/size_4dp">
+
+    <ImageView
+        android:id="@+id/gallery_item_imageView"
+        android:layout_width="100dp"
+        android:layout_height="142dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?android:colorBackground"
-        android:orientation="vertical"
-        android:padding="@dimen/size_4dp">
-
-        <ImageView
-            android:id="@+id/iv_item_simple_subject_image"
-            android:layout_width="100dp"
-            android:layout_height="142dp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            tools:ignore="ContentDescription" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/gallery_item_rating_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-            <LinearLayout
-                android:id="@+id/ll_item_simple_subject_rating"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <RatingBar
-                    android:id="@+id/rb_item_simple_subject_rating"
-                    style="@style/MovieRatingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5" />
-
-                <TextView
-                    android:id="@+id/tv_item_simple_subject_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size_4dp"
-                    android:textColor="@color/gray_500"
-                    android:textSize="@dimen/size_12sp" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_item_simple_subject_title"
+            <RatingBar
+                android:id="@+id/gallery_item_rating_rb"
+                style="@style/MovieRatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_4dp"
-                android:background="?android:colorBackground"
-                android:singleLine="true"
-                android:textSize="@dimen/size_15sp" />
+                android:numStars="5" />
 
+            <TextView
+                android:id="@+id/gallery_item_rating_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_4dp"
+                android:textColor="@color/gray_500"
+                android:textSize="@dimen/size_12sp" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/gallery_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_4dp"
+            android:background="?android:colorBackground"
+            android:singleLine="true"
+            android:textSize="@dimen/size_15sp" />
+
     </LinearLayout>
+</LinearLayout>
 
 </android.support.v7.widget.CardView>
 
-主要更改内容wie
+    <!--主要更改内容参见Git历史，主要为id名称的更改-->
     <!--Apache License-->
     <!--Version 2.0, January 2004-->
     <!--http://www.apache.org/licenses/-->

@@ -17,4 +17,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="MovieRatingBar" parent="@android:style/Widget.Holo.RatingBar.Small">
+        <item name="android:minHeight">@dimen/size_16dp</item>
+        <item name="android:maxHeight">@dimen/size_16dp</item>
+    </style>
+
 </resources>

@@ -27,15 +27,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("正在热映"));
         tabLayout.addTab(tabLayout.newTab().setText("即将上映"));
         tabLayout.addTab(tabLayout.newTab().setText("北美票房"));
-        tabLayout.addTab(tabLayout.newTab().setText("口碑榜"));
-
+        tabLayout.addTab(tabLayout.newTab().setText("Top 250"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.setOffscreenPageLimit(4);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

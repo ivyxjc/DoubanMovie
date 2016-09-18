@@ -1,13 +1,10 @@
 package com.jc.doubanmovie_4.fragment.base;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.LruCache;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,14 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jc.doubanmovie_4.LogKeys;
 import com.jc.doubanmovie_4.TransferKeys;
 import com.jc.doubanmovie_4.activity.MovieDetailActivity;
@@ -34,6 +25,7 @@ import com.jc.doubanmovie_4.model.MainItem;
 
 import java.util.ArrayList;
 
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 
 /**
@@ -41,20 +33,89 @@ import java.util.ArrayList;
  */
 public abstract class MainFragmentBase extends Fragment {
 
-    private static final String TAG = "MainFragment";
-    private RecyclerView mRecyclerView;
+    private int currentPage;
+
+    private static final String TAG = "MainFragmentBase";
+    protected RecyclerView mRecyclerView;
 
 
     protected ArrayList<MainItem> mItems;
 
     protected RecyclerViewAdapter_Main mRecyclerViewAdapter;
 
+    protected void setupAdapter() {
+        Log.i(LogKeys.MAIN_FRAGMENT, "new RecyclerViewApater");
+        mRecyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter_Main.OnItemClickListenerCustom() {
+            @Override
+            public void onItemClick(String id, String title) {
+                Log.i(LogKeys.MAIN_FRAGMENT, "item is clicked ");
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra(TransferKeys.MAIN_MOVIE_DETAIL_ID, id);
+                intent.putExtra(TransferKeys.MAIN_MOVIE_DETAIL_MOVIE_NAME, title);
+                startActivity(intent);
+                Log.i(LogKeys.MAIN_FRAGMENT, "startactivity");
+            }
+        });
+
+        if (getActivity() == null || mRecyclerView == null) {
+            Log.i(LogKeys.MAIN_FRAGMENT, "getActivity==null or mRcyclerView==null");
+            return;
+        }
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        Log.i(LogKeys.MAIN_FRAGMENT, "mRcyclerView set up adapter");
+
+
+            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+            {
+                int lastVisibleItem;
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView,
+                                                 int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (newState == SCROLL_STATE_IDLE
+                            && lastVisibleItem + 1 >= mRecyclerViewAdapter.getItemCount()
+                            && mRecyclerViewAdapter.getItemCount() < mRecyclerViewAdapter.getTotalDataCount()) {
+//                        Log.i("cccc","last: "+lastVisibleItem);
+//                        Log.i("cccc","adapterSize:"+mRecyclerViewAdapter.getItemCount());
+//                        Log.i("cccc","total: "+mRecyclerViewAdapter.getTotalDataCount());
+//                        Toast.makeText(getActivity(),"onScrollStateChanged",Toast.LENGTH_SHORT).show();
+                        loadMoreData(mRecyclerViewAdapter.getStart());
+
+                    }else if (newState == SCROLL_STATE_IDLE){
+//                        Log.i("cccc","last: "+lastVisibleItem);
+//                        Log.i("cccc","adapterSize: "+mRecyclerViewAdapter.getItemCount());
+//                        Log.i("cccc","total: "+mRecyclerViewAdapter.getTotalDataCount());
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+                    lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+
+                }
+            });
+
+    }
+
+    protected abstract void loadMoreData(int start);
+
+    private abstract class FetchItemTask extends AsyncTask<Void, Void, ArrayList<MainItem>> {
+        @Override
+        protected abstract ArrayList<MainItem> doInBackground(Void... params);
+
+        @Override
+        protected abstract void onPostExecute(ArrayList<MainItem> galleryItems);
+    }
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mItems=new ArrayList<>();
+        mRecyclerViewAdapter = new RecyclerViewAdapter_Main(getActivity(), mItems, false);
+
         setRetainInstance(true);
     }
 
@@ -78,75 +139,12 @@ public abstract class MainFragmentBase extends Fragment {
         //类似GridView显示
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
-        mRecyclerViewAdapter=new RecyclerViewAdapter_Main(getActivity(),mItems,false);
-        mRecyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter_Main.OnItemClickListener() {
-            @Override
-            public void onItemClick(String id,String title) {
-                Log.i(LogKeys.MAIN_FRAGMENT, "item is clicked ");
-                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
-                intent.putExtra(TransferKeys.MAIN_MOVIE_DETAIL_ID, id);
-                intent.putExtra(TransferKeys.MAIN_MOVIE_DETAIL_MOVIE_NAME, title);
-                startActivity(intent);
-                Log.i(LogKeys.MAIN_FRAGMENT, "startactivity");
-            }
-        });
+        setupAdapter();
         return v;
     }
 
 
 
-    protected void setupAdapter() {
-        if (getActivity() == null || mRecyclerView == null)
-            return;
-        if (mItems != null) {
-            mRecyclerView.setAdapter(new RecyclerViewAdapter_Main(getActivity(),mItems,true));
-        } else {
-            mRecyclerView.setAdapter(null);
-        }
-    }
-
-
-    private class GalleryItemAdapter extends ArrayAdapter<MainItem> {
-
-        public GalleryItemAdapter(ArrayList<MainItem> items) {
-            super(getActivity(), 0, items);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getActivity().getLayoutInflater()
-                        .inflate(R.layout.item_movie_main, parent, false);
-            }
-
-            ImageView imageView = (ImageView) convertView
-                    .findViewById(R.id.gallery_item_imageView);
-
-            TextView textView = (TextView) convertView
-                    .findViewById(R.id.gallery_item_text);
-
-            MainItem item = getItem(position);
-            Glide
-                    .with(getActivity())
-
-                    .load(item.getImageUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
-                    .into(imageView);
-
-            textView.setText(item.getTitle());
-            return convertView;
-        }
-    }
-
-
-    private abstract class FetchItemTask extends AsyncTask<Void, Void, ArrayList<MainItem>> {
-        @Override
-        protected abstract ArrayList<MainItem> doInBackground(Void... params);
-
-        @Override
-        protected abstract void onPostExecute(ArrayList<MainItem> galleryItems);
-    }
 
 
 

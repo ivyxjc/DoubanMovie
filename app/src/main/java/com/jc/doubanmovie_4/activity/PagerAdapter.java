@@ -1,18 +1,25 @@
 package com.jc.doubanmovie_4.activity;
 
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 
-import com.jc.doubanmovie_4.fragment.MainFragment;
-import com.jc.doubanmovie_4.fragment.MovieComingSoonFragment;
-import com.jc.doubanmovie_4.fragment.TopRatedFragment;
-import com.jc.doubanmovie_4.fragment.USBoxFragment;
+import com.jc.doubanmovie_4.fragment.main_page.MainFragment;
+import com.jc.doubanmovie_4.fragment.main_page.MovieComingSoonFragment;
+import com.jc.doubanmovie_4.fragment.main_page.TopRatedFragment;
+import com.jc.doubanmovie_4.fragment.main_page.USBoxFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+    private int mNumOfTabs;
+    private FragmentTransaction ft;
+    private Context mContext;
+    private MainFragment tab1;
+    private MovieComingSoonFragment tab2;
+    private USBoxFragment tab3;
+    private TopRatedFragment tab4;
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
@@ -22,18 +29,19 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
+
         switch (position) {
             case 0:
-                MainFragment tab1 = new MainFragment();
+                tab1 = new MainFragment();
                 return tab1;
             case 1:
-                MovieComingSoonFragment tab2 = new MovieComingSoonFragment();
+                tab2 = new MovieComingSoonFragment();
                 return tab2;
             case 2:
-                USBoxFragment tab3 = new USBoxFragment();
+                tab3 = new USBoxFragment();
                 return tab3;
             case 3:
-                TopRatedFragment tab4=new TopRatedFragment();
+                tab4=new TopRatedFragment();
                 return tab4;
             default:
                 return null;
