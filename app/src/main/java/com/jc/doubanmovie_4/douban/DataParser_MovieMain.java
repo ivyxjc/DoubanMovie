@@ -137,7 +137,7 @@ public class DataParser_MovieMain {
 //            JSONArray casts=movieJSONObject.getJSONArray(CASTS);
 //            for (int i=0;i<casts.length();i++){
 //                JSONObject castJSON=casts.getJSONObject(i);
-//                res.addCast(Integer.parseInt(castJSON.get(CAST_ID).toString()),castJSON.get(CAST_NAME).toString());
+//                res.addActor(Integer.parseInt(castJSON.get(CAST_ID).toString()),castJSON.get(CAST_NAME).toString());
 //            }
 
             /**
@@ -160,7 +160,7 @@ public class DataParser_MovieMain {
 //            JSONArray directors=movieJSONObject.getJSONArray(DIRECTORS);
 //            for (int i=0;i<directors.length();i++){
 //                JSONObject directorJSON=directors.getJSONObject(i);
-//                res.addCast(Integer.parseInt(directorJSON.get(DIRECTOR_ID).toString()),directorJSON.get(DIRECTOR_NAME).toString());
+//                res.addActor(Integer.parseInt(directorJSON.get(DIRECTOR_ID).toString()),directorJSON.get(DIRECTOR_NAME).toString());
 //            }
 //            for(int i=0;i<directors.length();i++){
 //                JSONObject directorJSON=directors.getJSONObject(i);

@@ -38,7 +38,7 @@ public class RecyclerViewAdapter_Main extends RecyclerView.Adapter<RecyclerView.
     private RequestManager mRequestManager;
 
     public interface OnItemClickListenerCustom {
-        void onItemClick(String id,String title);
+        void onItemClick(String id,String title,String url);
     }
 
     public RecyclerViewAdapter_Main(Context context, List<MainItem> data,
@@ -50,10 +50,10 @@ public class RecyclerViewAdapter_Main extends RecyclerView.Adapter<RecyclerView.
         mRequestManager=Glide.with(mContext);
     }
 
-    public void refresh(ArrayList<MainItem> datas){
-        mData.addAll(datas);
-        notifyDataSetChanged();
-    }
+//    public void refresh(ArrayList<MainItem> datas){
+//        mData.addAll(datas);
+//        notifyDataSetChanged();
+//    }
 
 
     public void addMoreData(ArrayList<MainItem> datas,int start){
@@ -80,10 +80,6 @@ public class RecyclerViewAdapter_Main extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Log.i(LogKeys.RECYCLER_ADAPATER_MAIN,"onBIndViewHolder");
         ((ItemViewHolder)holder).update();
-    }
-
-    public void loadmoredata(){
-        Toast.makeText(mContext,"aaa",Toast.LENGTH_SHORT).show();
     }
 
 
@@ -158,7 +154,7 @@ public class RecyclerViewAdapter_Main extends RecyclerView.Adapter<RecyclerView.
         public void onClick(View v) {
             if(mCallback!=null){
                 Log.i(LogKeys.RECYCLER_ADAPATER_MAIN,"before OnClick");
-                mCallback.onItemClick(mMainItem.getMovieId(),mMainItem.getTitle());
+                mCallback.onItemClick(mMainItem.getMovieId(),mMainItem.getTitle(),mMainItem.getImageUrl());
                 Log.i(TAG,"after OnClick");
             }
             Log.i(LogKeys.RECYCLER_ADAPATER_MAIN,"mCallback==null");

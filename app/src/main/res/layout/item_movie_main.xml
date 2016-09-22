@@ -8,61 +8,61 @@
                                     android:padding="@dimen/size_4dp"
                                     app:cardElevation="@dimen/size_1dp">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?android:colorBackground"
-    android:orientation="vertical"
-    android:padding="@dimen/size_4dp">
-
-    <ImageView
-        android:id="@+id/gallery_item_imageView"
-        android:layout_width="100dp"
-        android:layout_height="142dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="centerCrop"
-        tools:ignore="ContentDescription" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="?android:colorBackground"
+        android:orientation="vertical"
+        android:padding="@dimen/size_4dp">
+
+        <ImageView
+            android:id="@+id/gallery_item_imageView"
+            android:layout_width="100dp"
+            android:layout_height="142dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
-            android:id="@+id/gallery_item_rating_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:orientation="vertical">
 
-            <RatingBar
-                android:id="@+id/gallery_item_rating_rb"
-                style="@style/MovieRatingBar"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/gallery_item_rating_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numStars="5" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <RatingBar
+                    android:id="@+id/gallery_item_rating_rb"
+                    style="@style/MovieRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5" />
+
+                <TextView
+                    android:id="@+id/gallery_item_rating_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_4dp"
+                    android:textColor="@color/gray_500"
+                    android:textSize="@dimen/size_12sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/gallery_item_rating_text"
+                android:id="@+id/gallery_item_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_4dp"
-                android:textColor="@color/gray_500"
-                android:textSize="@dimen/size_12sp" />
+                android:layout_marginTop="@dimen/size_4dp"
+                android:background="?android:colorBackground"
+                android:singleLine="true"
+                android:textSize="@dimen/size_15sp" />
+
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/gallery_item_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_4dp"
-            android:background="?android:colorBackground"
-            android:singleLine="true"
-            android:textSize="@dimen/size_15sp" />
-
     </LinearLayout>
-</LinearLayout>
 
 </android.support.v7.widget.CardView>
 

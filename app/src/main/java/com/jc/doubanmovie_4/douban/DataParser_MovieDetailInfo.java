@@ -48,6 +48,12 @@ public class DataParser_MovieDetailInfo {
     private static final String MOVIE_SUMMARY="summary";
 
     private static final String COLLECT_COUNT= "collect_count";
+
+    private static final String RATING_COUNT="ratings_count";
+
+    //获取电影主演图片
+    private static final String ACTOR_AVATARS="avatars";
+
     private static final String YEAR="year";
 
     private static final String MOVIE_ID="id";
@@ -55,18 +61,11 @@ public class DataParser_MovieDetailInfo {
 
 
 
-
-
-
-
-
     private static final String MOVIE_IMAGE="images";
     private static final String MOVIE_COUNTRIES="countries";
 
     private static final String IMAGE_LARGE="large";
-
-
-
+    
     public static MainItem getMovieInfo(JSONObject dataJson){
 
 
@@ -121,6 +120,20 @@ public class DataParser_MovieDetailInfo {
             JSONObject ratingJSONObject=dataJson.getJSONObject(RATING);
             item.setAverageRating(ratingJSONObject.getString(RATING_AVERAGE));
 
+            /** 看过的人数
+             *   "collect_count": 43662,
+             */
+
+            String collectCount=dataJson.getString(COLLECT_COUNT);
+            item.setCollectNum(collectCount);
+
+
+            /**
+             * 评价人数
+             */
+            String ratingCount=dataJson.getString(RATING_COUNT);
+            item.setCollectNum(ratingCount);
+
             /**
              * 想看的人数
 
@@ -157,7 +170,9 @@ public class DataParser_MovieDetailInfo {
             JSONArray castsJSONArray=dataJson.getJSONArray(CASTS);
             for(int i=0;i<castsJSONArray.length();i++){
                 JSONObject castJSONObject=castsJSONArray.getJSONObject(i);
-                item.addCast(castJSONObject.getInt(CAST_ID),castJSONObject.getString(CAST_NAME));
+                int actorIdTmp=castJSONObject.getInt(CAST_ID);
+                item.addActor(actorIdTmp,castJSONObject.getString(CAST_NAME));
+                item.addActorImgUrl(actorIdTmp,castJSONObject.getJSONObject(ACTOR_AVATARS).getString(IMAGE_LARGE));
             }
 
 
@@ -169,13 +184,13 @@ public class DataParser_MovieDetailInfo {
             for(int i=0;i<directorsJSONArray.length();i++){
                 JSONObject directorJSONObject=directorsJSONArray.getJSONObject(i);
                 item.addDirector(directorJSONObject.getInt(DIRECTOR_ID),directorJSONObject.getString(DIRECTOR_NAME));
-            }
 
+            }
 
             /**
              * 编剧
              *
-             * api中未提供 ， 参考中提供 但是json数据中没有
+             * api中未提供 ， 豆瓣api文档中说明提供 但是json数据中没有
              */
 
 //            JSONArray writersJSONArray=dataJson.getJSONArray(WRITERS);
@@ -190,12 +205,9 @@ public class DataParser_MovieDetailInfo {
             item.setSummary(dataJson.getString(MOVIE_SUMMARY));
 
 
-
         }catch (JSONException e){
             Log.e(TAG,"json parser error"+e);
         }
-
-
 
         return item;
     }

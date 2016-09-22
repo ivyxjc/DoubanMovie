@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/size_2dp"
+              android:layout_marginTop="@dimen/size_2dp"
+              android:background="?android:colorBackground"
+              android:orientation="vertical"
+              android:padding="@dimen/size_6dp"
+                android:visibility="visible">
+
+    <ImageView
+        android:id="@+id/item_simple_actor_image"
+        android:layout_width="108dp"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/item_simple_actor_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_6dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/gray_600"
+        android:textSize="@dimen/size_14sp" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_item_simple_director_text"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/size_4dp"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/gray_500"-->
+        <!--android:textSize="@dimen/size_13sp" />-->
+</LinearLayout>

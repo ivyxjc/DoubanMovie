@@ -22,6 +22,7 @@ import com.jc.doubanmovie_4.R;
 //import com.jc.doubanmovie_4.ThumbnailDownloader;
 import com.jc.doubanmovie_4.adapter.RecyclerViewAdapter_Main;
 import com.jc.doubanmovie_4.model.MainItem;
+import com.jc.doubanmovie_4.utils.StringTo;
 
 import java.util.ArrayList;
 
@@ -47,11 +48,12 @@ public abstract class MainFragmentBase extends Fragment {
         Log.i(LogKeys.MAIN_FRAGMENT, "new RecyclerViewApater");
         mRecyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter_Main.OnItemClickListenerCustom() {
             @Override
-            public void onItemClick(String id, String title) {
+            public void onItemClick(String id, String title, String imgUrl) {
                 Log.i(LogKeys.MAIN_FRAGMENT, "item is clicked ");
                 Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
                 intent.putExtra(TransferKeys.MAIN_MOVIE_DETAIL_ID, id);
                 intent.putExtra(TransferKeys.MAIN_MOVIE_DETAIL_MOVIE_NAME, title);
+                intent.putExtra(TransferKeys.MAIN_MOVIE_DETAIL_MOVIE_IMGURL,imgUrl);
                 startActivity(intent);
                 Log.i(LogKeys.MAIN_FRAGMENT, "startactivity");
             }

@@ -23,6 +23,9 @@
         <activity android:name=".activity.MovieDetailActivity">
 
         </activity>
+        <activity android:name=".activity.WebActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -16,13 +16,18 @@ public class MainItem {
 
 
 
-    private Map<Integer,String> mCasts;//演员
+    private Map<Integer,String> mActors;//演员
     private Map<Integer,String> mDirectors;//导演
+
+    private Map<Integer,String> mActorsImgUrl;//演员图片
+    private Map<Integer,String> mDirectorsImgUrl;//导演图片
 
     private Map<Integer,String> mWriters;
 
     private String mCollectNum;//看过的人数
     private String mWishtCount;//想看的人数
+
+    private String mRatingCount;//评价人数
     private String mYear;//电影年份
 
     private String mImageUrl;// 图片url
@@ -35,10 +40,12 @@ public class MainItem {
 
 
     public MainItem(){
-        mCasts=new HashMap<>();
+        mActors =new HashMap<>();
         mDirectors=new HashMap<>();
         mCountries=new ArrayList<>();
         mGenres=new ArrayList<>();
+        mActorsImgUrl=new HashMap<>();
+        mDirectorsImgUrl=new HashMap<>();
     }
 
 
@@ -82,6 +89,16 @@ public class MainItem {
         mCollectNum = collectNum;
     }
 
+
+    public String getRatingCount() {
+        return mRatingCount;
+    }
+
+    public void setRatingCount(String ratingCount) {
+        mRatingCount = ratingCount;
+    }
+
+
     public String getYear() {
         return mYear;
     }
@@ -90,17 +107,19 @@ public class MainItem {
         mYear = year;
     }
 
-    public Map<Integer, String> getCasts() {
-        return mCasts;
+    public Map<Integer, String> getActors() {
+        return mActors;
+    }
+
+    public void addActor(Integer i, String s){
+        mActors.put(i,s);
     }
 
     public Map<Integer, String> getDirectors() {
         return mDirectors;
     }
 
-    public void addCast(Integer i,String s){
-        mCasts.put(i,s);
-    }
+
 
     public void addDirector(Integer i,String s){
         mDirectors.put(i,s);
@@ -162,6 +181,23 @@ public class MainItem {
         mSummary = summary;
     }
 
+
+
+    public void addActorImgUrl(Integer i,String s){
+        mActorsImgUrl.put(i,s);
+    }
+
+    public Map<Integer, String> getActorsImgUrl() {
+        return mActorsImgUrl;
+    }
+
+    public void addDirectorImgUrl(Integer i,String s){
+        mDirectorsImgUrl.put(i,s);
+    }
+
+    public Map<Integer, String> getDirectorsImgUrl() {
+        return mDirectorsImgUrl;
+    }
 
     @Override
     public String toString() {
